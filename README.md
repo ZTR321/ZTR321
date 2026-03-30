@@ -25,6 +25,18 @@ I use GitHub to document projects that I can explain honestly in interviews and 
 - LangGraph, Tool Calling, Gradio, prompt-based compliance review
 - Focus on workflow design, tool integration, and explanation-friendly system boundaries
 
+## Other Projects
+
+### 3. [SDSC Learning Hub](https://github.com/ZTR321/sdsc-learning-hub)
+
+- A local-first study automation workspace for graduate DS courses
+- Includes PDF extraction, course indexing, Canvas update tracking, and reusable study templates
+
+### 4. [LeetCode Codex Workbench](https://github.com/ZTR321/leetcode-codex-workbench)
+
+- A Python ACM-style algorithm practice workspace
+- Includes next-problem activation, local judge scripts, VS Code tasks, and progress tracking
+
 ## Tech Stack
 
 - Python
