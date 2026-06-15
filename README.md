@@ -1,100 +1,89 @@
-# Hi, I'm Taoran Zhang / 张涛然
+# Taoran Zhang / 张涛然
 
 Master's student in Data Science at City University of Hong Kong.  
-I am focusing on **AI Agent application development**, **LLM application engineering**, and **RAG-based research systems**.
+I focus on **AI Agent application development**, **LLM application engineering**, and **RAG systems for real business workflows**.
 
-My current goal is to build LLM applications that are not only runnable, but also controlled, traceable, evaluable, and practical for real business workflows.
+I am currently building Agent projects around one principle:
 
-## Current Focus
+> Put the model inside a controlled workflow: clear schema, tool boundaries, trace, evaluation, fallback, and human approval for high-risk actions.
 
-- AI Agent workflows with clear tool boundaries
-- Browser Agent / computer-use tasks with human approval gates
-- RAG systems with citations, no-answer behavior, and evaluation
-- Agent memory for personalized research and decision support
-- LLM application engineering with schema validation, trace, and fallback
+## Featured Projects
 
-## Featured AI Agent Projects
+| Project | What It Solves | Core Stack | Verified Results |
+| --- | --- | --- | --- |
+| **Enterprise Web Workflow Automation Agent**<br>企业网页流程自动化 Agent 系统 | Turns messy enterprise web pages into a controlled Agent workflow for reading pages, extracting business objects, drafting form fields, and blocking risky actions before submit. Recruiting portals are the demo scenario; the same pattern can transfer to OA, CRM, supplier portals, and internal dashboards. | Python, Playwright, browser-use, Qwen, Qwen-VL, Pydantic, pytest, action policy, dry-run form filling | `28 passed`; 5-portal offline benchmark `5/5`; dry-run form plan blocks upload/submit; real read-only Bilibili observation found 272 positions |
+| **LangGraph Memory-Augmented Industry Research Agent**<br>基于 LangGraph 的长期记忆型行业研究 Agent 系统 | Generates AI industry research reports with evidence, citations, memory recall, retry, and human-review checkpoints instead of unsupported fluent summaries. | Python, LangGraph, RAG, local memory, hybrid retrieval, optional DashScope/Bailian embedding and rerank, citation evaluation, pytest | `12 passed`; AI Agent industry report with 6 sources, 5 insights, 20 evidence snippets; citation precision `1.0`; citation coverage `1.0` |
 
-### 1. Enterprise Recruiting Browser Agent Workflow
+## Project 1: Enterprise Web Workflow Automation Agent
 
-A controlled browser-agent workflow for recruiting portals and other enterprise web workflows.
+A browser Agent prototype for enterprise web workflows. It is not a script that blindly clicks buttons. It observes web pages, extracts structured information, classifies action risk, drafts form fields in dry-run mode, and requires human confirmation before any high-risk operation.
 
-What it demonstrates:
+**Why I built it**
 
-- Browser observation with Playwright and browser-use
-- Structured `JobPosting` schema extraction
-- Rule-based and LLM-based extraction cross-checking
-- Qwen-VL screenshot safety review
-- Human-in-the-loop gates for risky actions such as apply, submit, login, or authorization
-- Trace, dashboard, offline evaluation, and fallback handling
+Enterprise processes still happen inside web pages: application forms, approval pages, supplier portals, CRM pages, and internal dashboards. A useful Agent must handle unstructured pages, dynamic UI, risky buttons, and failure recovery.
 
-Verified local results:
+**What I implemented**
 
-- Unit tests: `25 passed`
-- Mock workflow evaluation: `4 / 4`
-- Multi-site detail-page evaluation: `6 / 6`
-- Read-only real-page observation found 272 Bilibili campus positions and an LLM Agent related role
+- Read-only browser observation with Playwright and browser-use.
+- Structured schemas: `JobPosting`, `FormFillPlan`, `ActionPolicyDecision`, `WorkflowTrace`.
+- Rule extraction and Qwen text extraction cross-checking.
+- Qwen-VL screenshot safety review for visible risky actions.
+- Action policy engine for `read_only`, `fill_draft`, `upload_file`, `submit`, `authorization`, `payment`, and `destructive`.
+- Application form dry-run filling with field confidence and manual-review flags.
+- Trace files, dashboard reports, deterministic tests, and multi-portal offline benchmark.
 
-Core idea:
+**What this proves**
 
-> Enterprise Agent systems should not let the model act without boundaries. The model should work inside a controlled, evaluable, traceable, and recoverable workflow.
+- I can design Agent systems with controlled tool boundaries instead of one-off demos.
+- I understand why real-world Agent workflows need schema validation, audit trails, risk gates, and fallback paths.
+- The browser workflow is transferable beyond recruiting portals to enterprise operations.
 
-### 2. Memory-Augmented AI Industry Research Agent
+## Project 2: LangGraph Memory-Augmented Industry Research Agent
 
-A research-style Agent for AI industry reports, combining RAG, long-term memory, evidence citations, and evaluation.
+A research Agent for AI industry reports. It reads a source pack, retrieves evidence, recalls long-term memory, verifies citation quality, retries when evidence is weak, and enters human review when there is evidence tension.
 
-What it demonstrates:
+**Why I built it**
 
-- Plan -> retrieve -> verify -> report workflow
-- Hybrid retrieval with keyword, concept, and local embedding-style scoring
-- Evidence reranking and citation binding
-- Long-term memory retrieval for personalized interview angles
-- No-answer handling when evidence is insufficient
-- Evidence-tension detection for conflicting or tradeoff-heavy topics
-- Citation metrics and report evaluation
+Research Agent outputs often look complete but lack source grounding. I wanted the system to show where each conclusion comes from, when evidence is insufficient, and how the workflow reached the final report.
 
-Verified local results:
+**What I implemented**
 
-- Unit tests: `7 passed`
-- Generated AI Agent industry report with 6 sources, 5 insights, and 20 evidence snippets
-- Citation precision: `1.0`
-- Citation coverage: `1.0`
-- Evaluation accuracy for memory recall, JD fit, and industry report: `1.0`
+- LangGraph `StateGraph`: `plan -> retrieve_sources -> retrieve_memory -> retrieve_evidence -> verify -> retry / human_review -> report`.
+- Local long-term memory for profile, project background, and interview angles.
+- Hybrid retrieval with keyword, concept, and local embedding-style scoring.
+- Optional DashScope/Bailian embedding and rerank API path with local fallback.
+- Citation binding, no-answer handling, evidence-tension detection, and report evaluation.
+- Checkpoint interrupt/resume demo for human review.
+- Evaluation for memory recall, theme coverage, expected source recall, citation precision, and citation coverage.
 
-Core idea:
+**What this proves**
 
-> A research Agent should not only generate fluent reports. It should prove where each conclusion comes from, expose uncertainty, and make the workflow reviewable.
+- I can build stateful Agent workflows rather than simple RAG Q&A.
+- I can separate retrieval, verification, retry, review, and report generation into testable nodes.
+- I care about evidence quality, traceability, and hallucination control.
 
-## Earlier LLM Projects
+## Engineering Focus
 
-### Qwen2.5-7B Local SFT Practice
+- **Agent workflow:** tool calling, state schema, conditional routing, retry loop, human-in-the-loop, trace.
+- **Browser / computer-use:** Playwright, browser-use, read-only observation, action safety policy, dry-run form filling.
+- **RAG / research:** source parsing, hybrid retrieval, rerank, citation, no-answer, evidence tension.
+- **LLM integration:** Qwen, Qwen-VL, DeepSeek-compatible APIs, structured JSON output, fallback handling.
+- **Model adaptation background:** PyTorch, Hugging Face, Qwen2.5-7B instruction tuning, LoRA / QLoRA, chat template.
+- **Python engineering:** Pydantic, Typer, pytest, HTTP/Requests, HTML parsing, Git.
 
-- Resource-constrained local instruction fine-tuning practice
-- Qwen2.5-7B, Unsloth, LoRA / QLoRA, 4-bit quantization
-- Focus on dataset formatting, training configuration, and basic validation
+## Earlier Background Projects
 
-### LangGraph Finance Workflow
+- **Qwen2.5-7B Local SFT Practice:** local instruction tuning workflow with Unsloth, LoRA / QLoRA, 4-bit quantization, dataset formatting, and basic validation.
+- **LangGraph Finance Workflow:** Researcher / Tool / Reviewer workflow with tool calling, market-data API wrapper, parameter validation, timeout handling, and review logic.
 
-- Researcher / Tool / Reviewer workflow
-- LangGraph, Tool Calling, Gradio, prompt-based compliance review
-- Focus on tool integration, workflow boundaries, and explainable system design
+## Target Roles
 
-## Tech Stack
-
-- **Languages:** Python
-- **LLM Apps:** LangChain, LangGraph, browser-use, Playwright, Qwen, Qwen-VL, DeepSeek API
-- **RAG / Research:** hybrid retrieval, rerank, citation, no-answer, evidence tension, evaluation
-- **Training Basics:** PyTorch, Hugging Face, Unsloth, LoRA / QLoRA, SFT
-- **Engineering:** Pydantic, Typer, pytest, HTTP/Requests, HTML parsing, Git
-
-## What I Am Looking For
-
-Internship roles in:
+I am looking for internships in:
 
 - AI Agent application development
 - LLM application engineering
 - RAG / Agent workflow engineering
-- AI Coding / Agent evaluation / enterprise AI tools
+- AI Coding Agent / Agent evaluation / enterprise AI tools
 
 Preferred location: Shanghai.  
 Availability: can start within one week, 5 days per week.
