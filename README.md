@@ -11,10 +11,10 @@ I am currently building Agent projects around one principle:
 
 | Project | What It Solves | Core Stack | Verified Results |
 | --- | --- | --- | --- |
-| **Enterprise Web Workflow Automation Agent**<br>企业网页流程自动化 Agent 系统 | Turns messy enterprise web pages into a controlled Agent workflow for reading pages, extracting business objects, drafting form fields, and blocking risky actions before submit. Recruiting portals are the demo scenario; the same pattern can transfer to OA, CRM, supplier portals, and internal dashboards. | Python, Playwright, browser-use, Qwen, Qwen-VL, Pydantic, pytest, action policy, dry-run form filling | `28 passed`; 5-portal offline benchmark `5/5`; dry-run form plan blocks upload/submit; real read-only Bilibili observation found 272 positions |
-| **LangGraph Memory-Augmented Industry Research Agent**<br>基于 LangGraph 的长期记忆型行业研究 Agent 系统 | Generates AI industry research reports with evidence, citations, memory recall, retry, and human-review checkpoints instead of unsupported fluent summaries. | Python, LangGraph, RAG, local memory, hybrid retrieval, optional DashScope/Bailian embedding and rerank, citation evaluation, pytest | `12 passed`; AI Agent industry report with 6 sources, 5 insights, 20 evidence snippets; citation precision `1.0`; citation coverage `1.0` |
+| [**Enterprise Web Workflow Automation Agent**](https://github.com/ZTR321/enterprise-web-workflow-agent)<br>企业网页流程自动化 Agent 系统 | Turns messy enterprise web pages into a controlled Agent workflow for reading pages, extracting business objects, drafting form fields, and blocking risky actions before submit. Recruiting portals are the demo scenario; the same pattern can transfer to OA, CRM, supplier portals, and internal dashboards. | Python, Playwright, browser-use, Qwen, Qwen-VL, Pydantic, pytest, action policy, dry-run form filling | `28 passed`; 5-portal offline benchmark `5/5`; dry-run form plan blocks upload/submit; real read-only Bilibili observation found 272 positions |
+| [**LangGraph Memory-Augmented Industry Research Agent**](https://github.com/ZTR321/langgraph-memory-research-agent)<br>基于 LangGraph 的长期记忆型行业研究 Agent 系统 | Generates AI industry research reports with evidence, citations, memory recall, retry, and human-review checkpoints instead of unsupported fluent summaries. | Python, LangGraph, RAG, local memory, hybrid retrieval, optional DashScope/Bailian embedding and rerank, citation evaluation, pytest | `12 passed`; AI Agent industry report with 6 sources, 5 insights, 20 evidence snippets; citation precision `1.0`; citation coverage `1.0` |
 
-## Project 1: Enterprise Web Workflow Automation Agent
+## Project 1: [Enterprise Web Workflow Automation Agent](https://github.com/ZTR321/enterprise-web-workflow-agent)
 
 A browser Agent prototype for enterprise web workflows. It is not a script that blindly clicks buttons. It observes web pages, extracts structured information, classifies action risk, drafts form fields in dry-run mode, and requires human confirmation before any high-risk operation.
 
@@ -38,7 +38,7 @@ Enterprise processes still happen inside web pages: application forms, approval 
 - I understand why real-world Agent workflows need schema validation, audit trails, risk gates, and fallback paths.
 - The browser workflow is transferable beyond recruiting portals to enterprise operations.
 
-## Project 2: LangGraph Memory-Augmented Industry Research Agent
+## Project 2: [LangGraph Memory-Augmented Industry Research Agent](https://github.com/ZTR321/langgraph-memory-research-agent)
 
 A research Agent for AI industry reports. It reads a source pack, retrieves evidence, recalls long-term memory, verifies citation quality, retries when evidence is weak, and enters human review when there is evidence tension.
 
